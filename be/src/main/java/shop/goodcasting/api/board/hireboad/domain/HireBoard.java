@@ -11,6 +11,6 @@ public class HireBoard {
     private long hireBoardId;
 
     @Column private String title;
-    @Column private String content;
+    @Column private String contents;
     @Column private String regDate;
 }

@@ -12,6 +12,6 @@ import javax.persistence.Id;
 public class HireBoardDTO {
     private long hireBoardId;
     private String title;
-    private String content;
+    private String contents;
     private String regDate;
 }

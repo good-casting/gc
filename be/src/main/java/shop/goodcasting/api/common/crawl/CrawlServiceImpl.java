@@ -8,7 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import shop.goodcasting.api.article.hire.domain.Hire;
+
 import shop.goodcasting.api.common.csv.ConvertToCSV;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class CrawlServiceImpl implements CrawlService{
         log.info("save all 접속");
         Document document = connectUrl("https://castpick.co.kr/front/castpick/castingList?codeNum=50000002");
 
+
         Elements ttl = document.select("div.list_col5_img2>div>p.tit");
 
         List<Hire> hireList = new ArrayList<>();
@@ -36,11 +39,13 @@ public class CrawlServiceImpl implements CrawlService{
             Hire hi = new Hire();
             hi.setTitle(ttl.get(i).text());
 
+
             hireList.add(hi);
             crawlRepo.save(hi);
         }
         ConvertToCSV csv = new ConvertToCSV();
         csv.convert2CSV(hireList);
+
         return hireList;
     }
 

@@ -22,5 +22,6 @@ public class CrawlController {
     public ResponseEntity<List<Hire>> bugs() throws IOException {
         log.info("hire접속");
         return ResponseEntity.ok(service.saveAll());
+
     }
 }

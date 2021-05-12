@@ -5,8 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "actors")
 public class Actor {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "actor_id")
     private long actorId;
 
@@ -15,12 +14,13 @@ public class Actor {
     @Column private String name;
     @Column private String gender;
     @Column private String birthday;
-    @Column(name = "phone_number", unique = true) private String phoneNumber;
+    @Column(unique = true) private String phone;
     @Column private String authority;
     @Column private String height;
     @Column private String weight;
     @Column private String agency;
     @Column private boolean major;
+    @Column private String regDate;
 
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    List<Role> roles;

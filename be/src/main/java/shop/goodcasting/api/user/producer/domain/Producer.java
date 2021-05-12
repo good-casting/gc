@@ -1,10 +1,12 @@
 package shop.goodcasting.api.user.producer.domain;
 
+import shop.goodcasting.api.common.domain.BaseEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "producers")
-public class Producer {
+public class Producer extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "producer_id") private long producerId;
 

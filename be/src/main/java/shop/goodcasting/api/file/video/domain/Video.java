@@ -1,12 +1,13 @@
 package shop.goodcasting.api.file.video.domain;
 
 import shop.goodcasting.api.article.profile.domain.Profile;
+import shop.goodcasting.api.common.domain.BaseEntity;
 
 import javax.persistence.*;
 
 @Table(name = "videos")
 @Entity
-public class Video {
+public class Video extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "video_id")

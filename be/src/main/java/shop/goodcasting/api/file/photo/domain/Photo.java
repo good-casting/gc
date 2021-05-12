@@ -1,12 +1,13 @@
 package shop.goodcasting.api.file.photo.domain;
 
 import shop.goodcasting.api.article.profile.domain.Profile;
+import shop.goodcasting.api.common.domain.BaseEntity;
 
 import javax.persistence.*;
 
 @Table(name = "photos")
 @Entity
-public class Photo {
+public class Photo extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "photo_id")

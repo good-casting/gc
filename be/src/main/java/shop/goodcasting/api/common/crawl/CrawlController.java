@@ -19,9 +19,9 @@ public class CrawlController {
     private final CrawlServiceImpl service;
 
     @GetMapping("/hire")
-    public ResponseEntity<List<Hire>> bugs(Hire hire) throws IOException {
+    public ResponseEntity<List<Hire>> bugs() throws IOException {
         log.info("hire접속");
-        log.info("hire" + hire);
-        return ResponseEntity.ok(service.saveAll(hire));
+        return ResponseEntity.ok(service.saveAll());
+
     }
 }

@@ -1,5 +1,6 @@
 package shop.goodcasting.api.article.hire.domain;
 
+import lombok.Data;
 import shop.goodcasting.api.common.domain.HireProfile;
 import shop.goodcasting.api.user.producer.domain.Producer;
 
@@ -7,7 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity @Data
 @Table(name = "hires")
 public class Hire {
     @Id

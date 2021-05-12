@@ -13,5 +13,5 @@ public class HireBoardDTO {
     private long hireBoardId;
     private String title;
     private String contents;
-    private String regDate;
+
 }

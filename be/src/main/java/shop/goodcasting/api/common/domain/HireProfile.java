@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Table(name = "hire_profiles")
 @Entity
-public class HireProfile {
+public class HireProfile extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "hire_profile_id")

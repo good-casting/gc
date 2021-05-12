@@ -1,10 +1,12 @@
 package shop.goodcasting.api.board.hireboad.domain;
 
+import shop.goodcasting.api.common.domain.BaseEntity;
+
 import javax.persistence.*;
 
 @Table(name = "hire_boards")
 @Entity
-public class HireBoard {
+public class HireBoard extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "hire_board_id")
@@ -12,5 +14,4 @@ public class HireBoard {
 
     @Column private String title;
     @Column private String contents;
-    @Column private String regDate;
 }

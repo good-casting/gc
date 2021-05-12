@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shop.goodcasting.api.article.hire.domain.Hire;
+import shop.goodcasting.api.user.actor.domain.Actor;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 public class CrawlController {
     private final CrawlServiceImpl service;
 
-    @GetMapping("/hire")
-    public ResponseEntity<List<Hire>> bugs() throws IOException {
-        log.info("hire접속");
-        return ResponseEntity.ok(service.saveAll());
+    @GetMapping("/hactor")
+    public ResponseEntity<List<Actor>> bugs(Actor actor) throws IOException {
+        return ResponseEntity.ok(service.actorCrawl(actor));
     }
+
 }

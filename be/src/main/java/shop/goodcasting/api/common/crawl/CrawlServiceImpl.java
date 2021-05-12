@@ -5,10 +5,12 @@ import lombok.extern.java.Log;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import shop.goodcasting.api.article.hire.domain.Hire;
 import shop.goodcasting.api.common.csv.ConvertToCSV;
+import shop.goodcasting.api.user.actor.domain.Actor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,26 +23,54 @@ public class CrawlServiceImpl implements CrawlService{
 
     private final CrawlRepository crawlRepo;
 
+    @Override
+    public List<Actor> actorCrawl(Actor actor) throws IOException {
+        log.info("save all 접속");
+        Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/category/282/page/1");
+        Elements link = document.select("div.description>a");
+
+        List<Actor> actorList = new ArrayList<>();
+        List<String> list = new ArrayList();
+
+        for (int i = 0; i < link.size(); i++) {;
+            String a = link.get(i).attr("href");
+            list.add(a);
+        }
+
+        for(int i=0; i < link.size(); i++){
+            String value = list.get(i);
+
+            Document innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
+
+            Element phoneNumber = innerDoc.select("table.unstackable>tbody>tr:eq(2)>td.three+td").first();
+            Element height = innerDoc.select("table.unstackable>tbody>tr:eq(3)>td.three+td").first();
+            Element weight = innerDoc.select("table.unstackable>tbody>tr:eq(4)>td.three+td").first();
+
+            actor.setPhone(phoneNumber.text());
+            actor.setWeight(weight.text());
+            actor.setHeight(height.text());
+
+            actorList.add(actor);
+        }
+        return actorList;
+    }
 
     @Override
-    public List<Hire> saveAll() throws IOException {
-
-        log.info("save all 접속");
-        Document document = connectUrl("https://castpick.co.kr/front/castpick/castingList?codeNum=50000002");
-
-        Elements ttl = document.select("div.list_col5_img2>div>p.tit");
-
-        List<Hire> hireList = new ArrayList<>();
-
-        for (int i = 0; i < ttl.size(); i++) {
-            Hire hi = new Hire();
-            hi.setTitle(ttl.get(i).text());
-
-            hireList.add(hi);
-            crawlRepo.save(hi);
-        }
-        ConvertToCSV csv = new ConvertToCSV();
-        csv.convert2CSV(hireList);
+    public List<Actor> nomalCrawl() throws IOException {
+//        log.info("save all 접속");
+//        Document document = connectUrl("https://castpick.co.kr/front/castpick/castingList?codeNum=50000002");
+//        crawlRepo.deleteAll();
+//
+//        Elements ttl = document.select("div.list_col5_img2>div>p.tit");
+//
+        List<Actor> hireList = new ArrayList<>();
+//
+//        for (int i = 0; i < ttl.size(); i++) {
+//            Actor a = new Actor();
+//            a.setTitle(ttl.get(i).text());
+//            hireList.add(a);
+//            crawlRepo.save(a);
+//        }
         return hireList;
     }
 

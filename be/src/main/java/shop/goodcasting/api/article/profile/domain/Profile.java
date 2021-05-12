@@ -20,7 +20,6 @@ public class Profile extends BaseEntity {
     @Column boolean privacy;
     @Column String contents;
     @Column private String career;
-    @Column private String regDate;
 
     @ManyToOne
     @JoinColumn(name = "actor_id")

@@ -13,6 +13,5 @@ public class HireBoard extends BaseEntity {
     private long hireBoardId;
 
     @Column private String title;
-    @Column private String content;
-    @Column private String regDate;
+    @Column private String contents;
 }

@@ -18,7 +18,6 @@ public class Hire extends BaseEntity {
 
     @Column private String title;
     @Column private String contents;
-//    @Column private String regDate;
 
     @ManyToOne
     @JoinColumn(name = "producer_id")

@@ -10,5 +10,4 @@ public class HireDTO {
     private long hiresId;
     private String title;
     private String contents;
-    private String regDate;
 }

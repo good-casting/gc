@@ -21,6 +21,7 @@ public class CrawlServiceImpl implements CrawlService{
 
     private final CrawlRepository crawlRepo;
 
+
     @Override
     public List<Hire> saveAll() throws IOException {
 
@@ -30,8 +31,6 @@ public class CrawlServiceImpl implements CrawlService{
         Elements ttl = document.select("div.list_col5_img2>div>p.tit");
 
         List<Hire> hireList = new ArrayList<>();
-
-
 
         for (int i = 0; i < ttl.size(); i++) {
             Hire hi = new Hire();

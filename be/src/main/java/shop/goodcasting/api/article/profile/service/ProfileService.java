@@ -1,4 +1,4 @@
-package shop.goodcasting.api.board.profile.service;
+package shop.goodcasting.api.article.profile.service;
 
 public interface ProfileService {
 }

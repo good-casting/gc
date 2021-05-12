@@ -1,8 +1,8 @@
-package shop.goodcasting.api.board.hire.controller;
+package shop.goodcasting.api.article.hire.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
-import shop.goodcasting.api.board.hire.service.HireServiceImpl;
+import shop.goodcasting.api.article.hire.service.HireServiceImpl;
 
 @RestController
 @RequiredArgsConstructor

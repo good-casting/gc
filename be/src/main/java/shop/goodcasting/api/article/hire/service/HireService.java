@@ -1,4 +1,4 @@
-package shop.goodcasting.api.board.hire.service;
+package shop.goodcasting.api.article.hire.service;
 
 public interface HireService {
 }

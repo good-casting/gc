@@ -1,4 +1,4 @@
-package shop.goodcasting.api.board.hire.domain;
+package shop.goodcasting.api.article.hire.domain;
 
 
 import lombok.Data;

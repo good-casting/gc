@@ -1,5 +1,6 @@
 package shop.goodcasting.api.article.profile.domain;
 
+import shop.goodcasting.api.common.domain.BaseEntity;
 import shop.goodcasting.api.common.domain.HireProfile;
 import shop.goodcasting.api.file.video.domain.Video;
 import shop.goodcasting.api.user.actor.domain.Actor;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "profiles")
-public class Profile {
+public class Profile extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "profile_id")

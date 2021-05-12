@@ -21,9 +21,9 @@ public class CrawlServiceImpl implements CrawlService{
 
     private final CrawlRepository crawlRepo;
 
-
     @Override
     public List<Hire> saveAll() throws IOException {
+
         log.info("save all 접속");
         Document document = connectUrl("https://castpick.co.kr/front/castpick/castingList?codeNum=50000002");
 

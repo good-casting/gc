@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CrawlService {
     Document connectUrl(String url) throws IOException;
-    List<Hire> saveAll(Hire hire) throws IOException;
+    List<Hire> saveAll() throws IOException;
 }

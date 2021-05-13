@@ -1,6 +1,7 @@
 package shop.goodcasting.api.article.hire.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import shop.goodcasting.api.board.hireboad.domain.HireBoard;
 import shop.goodcasting.api.common.domain.BaseEntity;
 import shop.goodcasting.api.common.domain.HireProfile;
 import shop.goodcasting.api.user.producer.domain.Producer;
@@ -9,7 +10,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @Data
+@Getter
+@Entity
 @Table(name = "hires")
 public class Hire extends BaseEntity {
     @Id
@@ -25,4 +27,8 @@ public class Hire extends BaseEntity {
 
     @OneToMany(mappedBy = "hire")
     private List<HireProfile> profiles = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "hire_board_id")
+    private HireBoard hireBoard;
 }

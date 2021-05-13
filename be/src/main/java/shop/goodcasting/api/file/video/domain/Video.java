@@ -1,10 +1,12 @@
 package shop.goodcasting.api.file.video.domain;
 
+import lombok.Getter;
 import shop.goodcasting.api.article.profile.domain.Profile;
 import shop.goodcasting.api.common.domain.BaseEntity;
 
 import javax.persistence.*;
 
+@Getter
 @Table(name = "videos")
 @Entity
 public class Video extends BaseEntity {

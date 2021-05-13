@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Modal } from "react-bootstrap";
 import GlobalContext from "../../context/GlobalContext";
+import Checkbox from "../Core/Checkbox"
 
 const ModalStyled = styled(Modal)`
   /* &.modal {
@@ -53,6 +54,7 @@ const ModalSignUp = (props) => {
                   <p className="mb-0 font-size-4 text-white">
                     Create your account to continue and explore new jobs.
                   </p>
+                  <Checkbox />
                 </div>
                 <div className="border-top border-default-color-2 mt-auto">
                   <div className="d-flex mx-n9 pt-6 flex-xs-row flex-column">

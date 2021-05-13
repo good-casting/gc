@@ -19,9 +19,9 @@ import java.util.List;
 public class CrawlController {
     private final CrawlServiceImpl service;
 
-    @GetMapping("/hactor")
-    public ResponseEntity<List<Actor>> bugs(Actor actor) throws IOException {
-        return ResponseEntity.ok(service.actorCrawl(actor));
+    @GetMapping("/actor")
+    public ResponseEntity<List<Actor>> bugs() throws IOException {
+        return ResponseEntity.ok(service.nomalCrawl());
     }
 
 }

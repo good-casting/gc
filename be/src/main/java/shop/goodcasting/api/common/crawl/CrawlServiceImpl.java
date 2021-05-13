@@ -24,53 +24,54 @@ public class CrawlServiceImpl implements CrawlService{
     private final CrawlRepository crawlRepo;
 
     @Override
-    public List<Actor> actorCrawl(Actor actor) throws IOException {
-        log.info("save all 접속");
+    public List<Actor> actorCrawl() throws IOException {
         Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/category/282/page/1");
         Elements link = document.select("div.description>a");
 
-        List<Actor> actorList = new ArrayList<>();
         List<String> list = new ArrayList();
+        Document innerDoc = null;
 
         for (int i = 0; i < link.size(); i++) {;
             String a = link.get(i).attr("href");
             list.add(a);
         }
 
-        for(int i=0; i < link.size(); i++){
+        log.info("list.size : " + list.size());
+
+        List<Actor> actorList = new ArrayList<>();
+
+        for(int i = 0; i < list.size(); i++){
             String value = list.get(i);
+            innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
+            Elements birthday = innerDoc.select("table.unstackable>tbody>tr:eq(0)>td.three+td");
+            log.info("birthday" + birthday);
 
-            Document innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
-
-            Element phoneNumber = innerDoc.select("table.unstackable>tbody>tr:eq(2)>td.three+td").first();
-            Element height = innerDoc.select("table.unstackable>tbody>tr:eq(3)>td.three+td").first();
-            Element weight = innerDoc.select("table.unstackable>tbody>tr:eq(4)>td.three+td").first();
-
-            actor.setPhone(phoneNumber.text());
-            actor.setWeight(weight.text());
-            actor.setHeight(height.text());
-
+            Actor actor = new Actor();
+            // actor.setBirthday(birthday.get(i).text());
             actorList.add(actor);
+            crawlRepo.save(actor);
         }
+        log.info("actorList.size() : " + actorList.size());
         return actorList;
     }
 
     @Override
     public List<Actor> nomalCrawl() throws IOException {
-//        log.info("save all 접속");
-//        Document document = connectUrl("https://castpick.co.kr/front/castpick/castingList?codeNum=50000002");
-//        crawlRepo.deleteAll();
-//
-//        Elements ttl = document.select("div.list_col5_img2>div>p.tit");
-//
+        log.info("save all 접속");
+        Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/category/282/page/1");
+
+        Elements ttl = document.select("div.extra>p");
+        Elements name = document.select("div.description>a");
+
         List<Actor> hireList = new ArrayList<>();
-//
-//        for (int i = 0; i < ttl.size(); i++) {
-//            Actor a = new Actor();
-//            a.setTitle(ttl.get(i).text());
-//            hireList.add(a);
-//            crawlRepo.save(a);
-//        }
+
+        for (int i = 0; i < ttl.size(); i++) {
+            Actor a = new Actor();
+            // a.setBirthday(ttl.get(i).text());
+            // a.setName(name.get(i).text());
+            hireList.add(a);
+            crawlRepo.save(a);
+        }
         return hireList;
     }
 
@@ -86,4 +87,3 @@ public class CrawlServiceImpl implements CrawlService{
                 .execute()
                 .parse();
     }
-}

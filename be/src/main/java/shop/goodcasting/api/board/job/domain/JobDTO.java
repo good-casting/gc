@@ -1,13 +1,12 @@
-package shop.goodcasting.api.board.hireboad.domain;
+package shop.goodcasting.api.board.job.domain;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class HireBoardDTO {
-    private long hireBoardId;
+public class JobDTO {
+    private long jobId;
     private String title;
     private String contents;
-
 }

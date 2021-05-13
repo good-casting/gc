@@ -10,5 +10,5 @@ import java.util.List;
 public interface CrawlService {
     Document connectUrl(String url) throws IOException;
     List<Actor> nomalCrawl() throws IOException;
-    List<Actor> actorCrawl(Actor actor) throws IOException;
+    List<Actor> actorCrawl() throws IOException;
 }

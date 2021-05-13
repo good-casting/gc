@@ -1,12 +1,12 @@
 package shop.goodcasting.api.user.actor.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import shop.goodcasting.api.common.domain.BaseEntity;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
-@Data
 @Table(name = "actors")
 public class Actor extends BaseEntity {
     @Id @GeneratedValue
@@ -24,7 +24,6 @@ public class Actor extends BaseEntity {
     @Column private String weight;
     @Column private String agency;
     @Column private boolean major;
-    @Column private String regDate;
 
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    List<Role> roles;

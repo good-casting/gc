@@ -19,5 +19,4 @@ public class Producer extends BaseEntity {
     @Column private String agency;
     @Column private String phone;
     @Column private String position;
-    @Column private String regDate;
 }

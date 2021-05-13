@@ -24,7 +24,6 @@ public class Actor extends BaseEntity {
     @Column private String weight;
     @Column private String agency;
     @Column private boolean major;
-    @Column private String regDate;
 
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    List<Role> roles;

@@ -18,7 +18,6 @@ public class Photo extends BaseEntity {
     @Column(name = "file_size") private String fileSize;
     @Column(name = "file_name") private String fileName;
     @Column(name = "saved_file_name") private String savedFileName;
-    @Column private String regDate;
 
     @ManyToOne
     @JoinColumn(name = "profile_id")

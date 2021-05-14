@@ -19,20 +19,19 @@ import java.util.List;
 @Log
 @Service
 @RequiredArgsConstructor
-public class CrawlServiceImpl implements CrawlService {
+public class CrawlServiceImpl implements CrawlService{
 
     private final CrawlRepository crawlRepo;
 
     @Override
     public List<Actor> actorCrawl() throws IOException {
-        Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/page/4");
+        Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/category/282/page/1");
         Elements link = document.select("div.description>a");
 
         List<String> list = new ArrayList();
         Document innerDoc = null;
 
-        for (int i = 0; i < link.size(); i++) {
-            ;
+        for (int i = 0; i < link.size(); i++) {;
             String a = link.get(i).attr("href");
             list.add(a);
         }
@@ -41,30 +40,16 @@ public class CrawlServiceImpl implements CrawlService {
 
         List<Actor> actorList = new ArrayList<>();
 
-        for (int i = 0; i < list.size(); i++) {
+        for(int i = 0; i < list.size(); i++){
             String value = list.get(i);
             innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
-            Elements name = innerDoc.select("table.ui>thead>tr>th>h2>a");
             Elements birthday = innerDoc.select("table.unstackable>tbody>tr:eq(0)>td.three+td");
-            Elements height = innerDoc.select("table.unstackable>tbody>tr:eq(3)>td.three+td");
-            Elements weight = innerDoc.select("table.unstackable>tbody>tr:eq(4)>td.three+td");
-
-            log.info("name" + name);
+            log.info("birthday" + birthday);
 
             Actor actor = new Actor();
-            String yeardel= birthday.text().replace("년",""); //출생년도 "년" 삭제
-            String cmdel= height.text().replace("Cm",""); //키 "cm" 삭제
-            String kgdel= weight.text().replace("Kg",""); //키 "cm" 삭제
-            boolean human = (height.text().contains("Cm") &&weight.text().contains("Kg"));
-
-            if(human){
-                actor.setBirthday(yeardel);
-                actor.setHeight(cmdel);
-                actor.setWeight(kgdel);
-                actor.setName(name.text());
-                actorList.add(actor);
-                crawlRepo.save(actor);
-            }
+            // actor.setBirthday(birthday.get(i).text());
+            actorList.add(actor);
+            crawlRepo.save(actor);
         }
         log.info("actorList.size() : " + actorList.size());
         return actorList;
@@ -102,4 +87,3 @@ public class CrawlServiceImpl implements CrawlService {
                 .execute()
                 .parse();
     }
-}

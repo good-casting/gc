@@ -1,6 +1,9 @@
 package shop.goodcasting.api.user.producer.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.goodcasting.api.common.domain.BaseEntity;
 
 import javax.persistence.*;

@@ -1,13 +1,12 @@
 package shop.goodcasting.api.user.actor.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import shop.goodcasting.api.common.domain.BaseEntity;
 
 import javax.persistence.*;
 
 @Getter
-@Entity @Data
+@Entity
 @Table(name = "actors")
 public class Actor extends BaseEntity {
     @Id @GeneratedValue

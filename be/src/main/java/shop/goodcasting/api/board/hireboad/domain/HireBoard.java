@@ -12,7 +12,7 @@ public class HireBoard extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "hire_board_id")
-    private Long hireBoardId;
+    private long hireBoardId;
 
     @Column private String title;
     @Column private String contents;

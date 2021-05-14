@@ -16,11 +16,11 @@ import java.util.List;
 @Table(name = "profiles")
 public class Profile extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")
-    private long profileId;
+    private Long profileId;
 
-    @Column boolean privacy;
+    @Column Boolean privacy;
     @Column String contents;
     @Column private String career;
 

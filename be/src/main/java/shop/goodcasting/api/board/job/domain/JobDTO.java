@@ -6,7 +6,5 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class JobDTO {
-    private long jobId;
-    private String title;
-    private String contents;
+    private Long jobId;
 }

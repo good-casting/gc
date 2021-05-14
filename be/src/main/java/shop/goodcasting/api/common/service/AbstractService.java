@@ -1,3 +1,4 @@
+
 package shop.goodcasting.api.common.service;
 
 
@@ -12,5 +13,4 @@ public abstract class AbstractService<T> {
     public abstract Optional<T> getOne(long id);
     public abstract long delete(T t);
     public abstract boolean existById(long id);
-
 }

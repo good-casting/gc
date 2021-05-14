@@ -1,27 +1,34 @@
 package shop.goodcasting.api.user.actor.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Data
-@Component
+@Component @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ActorDTO {
-    private long actorsId;
+    private Long actorId;
     private String username;
     private String password;
     private String name;
     private String gender;
     private String birthday;
-    private String phoneNumber;
+    private String phone;
     private String authority;
     private String height;
     private String weight;
     private String agency;
-    private boolean majority;
+    private boolean major;
 
 //    private List<Role> roles;
 
     private String token;
+
+
 }

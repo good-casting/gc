@@ -17,15 +17,4 @@ public class HireBoard extends BaseEntity {
     @Column(name = "hire_board_id")
     private Long hireBoardId;
 
-
-    @Column private String title;
-    @Column private String contents;
-
-    public void changeTitle(String title) {
-        this.title = title;
-    }
-    public void changeContents(String contents) {
-        this.contents = contents;
-    }
-
 }

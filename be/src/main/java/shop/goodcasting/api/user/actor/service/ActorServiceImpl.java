@@ -9,7 +9,6 @@ import shop.goodcasting.api.user.actor.domain.Actor;
 import shop.goodcasting.api.user.actor.domain.ActorDTO;
 import shop.goodcasting.api.user.actor.repository.ActorRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ public class ActorServiceImpl extends AbstractService<Actor> implements ActorSer
 
     @Override
     public Long save(Actor actor) {
-        return (repo.save(actor) != null) ? 1L : 0L;
+        return null;
     }
 
     @Override
@@ -53,7 +52,7 @@ public class ActorServiceImpl extends AbstractService<Actor> implements ActorSer
     }
 
     @Override
-    public boolean existById(Long id) {
+    public Boolean existById(Long id) {
         return repo.existsById(id);
     }
 

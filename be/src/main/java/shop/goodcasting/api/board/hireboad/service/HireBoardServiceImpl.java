@@ -1,7 +1,6 @@
 package shop.goodcasting.api.board.hireboad.service;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import shop.goodcasting.api.board.hireboad.domain.HireBoard;
 import shop.goodcasting.api.board.hireboad.domain.HireBoardDTO;
@@ -18,13 +17,13 @@ public class HireBoardServiceImpl extends AbstractService<HireBoard> implements 
     private final HireBoardRepository repo;
 
     @Override
-    public long save(HireBoard hireBoard) {
+    public Long save(HireBoard hireBoard) {
         repo.save(hireBoard);
         return 1L;
     }
 
     @Override
-    public Optional<HireBoard> findById(long id) {
+    public Optional<HireBoard> findById(Long id) {
         return repo.findById(id);
     }
 
@@ -34,23 +33,23 @@ public class HireBoardServiceImpl extends AbstractService<HireBoard> implements 
     }
 
     @Override
-    public long count() {
+    public Long count() {
         return repo.count();
     }
 
     @Override
-    public Optional<HireBoard> getOne(long id) {
+    public Optional<HireBoard> getOne(Long id) {
         return Optional.of(repo.getOne(id));
     }
 
     @Override
-    public long delete(HireBoard hireBoard) {
+    public Long delete(HireBoard hireBoard) {
         repo.delete(hireBoard);
         return (findById(hireBoard.getHireBoardId()).orElse(null) == null) ? 1L : 0L;
     }
 
     @Override
-    public boolean existById(long id) {
+    public Boolean existById(Long id) {
         return repo.existsById(id);
     }
 
@@ -61,9 +60,6 @@ public class HireBoardServiceImpl extends AbstractService<HireBoard> implements 
 
         if (result.isPresent()){
             HireBoard hireBoard = result.get();
-
-            hireBoard.changeTitle(hireBoardDTO.getTitle());
-            hireBoard.changeContents(hireBoardDTO.getContents());
 
             repo.save(hireBoard);
         }

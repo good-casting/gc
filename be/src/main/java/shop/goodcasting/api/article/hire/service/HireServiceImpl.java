@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class HireServiceImpl extends AbstractService<Hire> implements HireService {
-
     private final HireRepository repo;
 
     @Override
@@ -23,8 +22,6 @@ public class HireServiceImpl extends AbstractService<Hire> implements HireServic
         if (result.isPresent()) {
             Hire hire = result.get();
 
-            hire.changeTitle(hireDTO.getTitle());
-            hire.changeContents(hireDTO.getContents());
             repo.save(hire);
 
         }
@@ -32,13 +29,13 @@ public class HireServiceImpl extends AbstractService<Hire> implements HireServic
     }
 
     @Override
-    public long save(Hire hire) {
+    public Long save(Hire hire) {
         repo.save(hire);
         return 1L;
     }
 
     @Override
-    public Optional<Hire> findById(long id) {
+    public Optional<Hire> findById(Long id) {
         return repo.findById(id);
     }
 
@@ -48,23 +45,23 @@ public class HireServiceImpl extends AbstractService<Hire> implements HireServic
     }
 
     @Override
-    public long count() {
+    public Long count() {
         return repo.count();
     }
 
     @Override
-    public Optional<Hire> getOne(long id) {
+    public Optional<Hire> getOne(Long id) {
         return Optional.of(repo.getOne(id));
     }
 
     @Override
-    public long delete(Hire hire) {
+    public Long delete(Hire hire) {
         repo.delete(hire);
         return (findById(hire.getHireId()).orElse( null ) == null) ? 1L : 0L;
     }
 
     @Override
-    public boolean existById(long id) {
+    public Boolean existById(Long id) {
         return repo.existsById(id);
     }
 }

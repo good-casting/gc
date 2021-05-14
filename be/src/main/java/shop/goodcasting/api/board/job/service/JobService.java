@@ -8,11 +8,4 @@ import shop.goodcasting.api.board.job.domain.JobDTO;
 public interface JobService {
     Job update(JobDTO jobDTO);
 
-    default Job dtoToEntity(JobDTO jobDTO){
-        return Job.builder()
-                .jobId(jobDTO.getJobId())
-                .title(jobDTO.getTitle())
-                .contents(jobDTO.getContents())
-                .build();
-    }
 }

@@ -16,12 +16,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ProducerServiceImpl extends AbstractService<Producer> implements ProducerService {
-
     private final ProducerRepository repo;
     private final ModelMapper modelMapper;
+
     @Override
     public Long save(Producer producer) {
-        return (repo.save(producer) != null) ? 1L : 0L;
+        return null;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ProducerServiceImpl extends AbstractService<Producer> implements Pr
     }
 
     @Override
-    public boolean existById(Long id) {
+    public Boolean existById(Long id) {
         return repo.existsById(id);
     }
 

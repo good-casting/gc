@@ -13,8 +13,6 @@ public interface HireBoardService {
    default HireBoard dtoTOEntity(HireBoardDTO hireBoardDTO) {
       return HireBoard.builder()
               .hireBoardId(hireBoardDTO.getHireBoardId())
-              .contents(hireBoardDTO.getContents())
-              .title(hireBoardDTO.getTitle())
               .build();
    }
 }

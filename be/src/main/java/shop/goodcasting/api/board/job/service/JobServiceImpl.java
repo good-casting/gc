@@ -21,8 +21,6 @@ public class JobServiceImpl extends AbstractService<Job> implements JobService {
 
         if (result.isPresent()) {
             Job job = result.get();
-            job.changeTitle(jobDTO.getTitle());
-            job.changeContents(jobDTO.getContents());
 
             repo.save(job);
         }
@@ -30,13 +28,13 @@ public class JobServiceImpl extends AbstractService<Job> implements JobService {
     }
 
     @Override
-    public long save(Job job) {
+    public Long save(Job job) {
         repo.save(job);
         return 1L;
     }
 
     @Override
-    public Optional<Job> findById(long id) {
+    public Optional<Job> findById(Long id) {
         return repo.findById(id);
     }
 
@@ -46,23 +44,23 @@ public class JobServiceImpl extends AbstractService<Job> implements JobService {
     }
 
     @Override
-    public long count() {
+    public Long count() {
         return repo.count();
     }
 
     @Override
-    public Optional<Job> getOne(long id) {
+    public Optional<Job> getOne(Long id) {
         return Optional.of(repo.getOne(id));
     }
 
     @Override
-    public long delete(Job job) {
+    public Long delete(Job job) {
         repo.delete(job);
         return (findById(job.getJobId()).orElse(null) == null ) ? 1L : 0L;
     }
 
     @Override
-    public boolean existById(long id) {
+    public Boolean existById(Long id) {
         return repo.existsById(id);
     }
 }

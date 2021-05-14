@@ -29,7 +29,7 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Job>> findById(@PathVariable long id) {
+    public ResponseEntity<Optional<Job>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 

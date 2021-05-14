@@ -19,7 +19,7 @@ import java.util.List;
 @Log
 @Service
 @RequiredArgsConstructor
-public class CrawlServiceImpl implements CrawlService{
+public class CrawlServiceImpl implements CrawlService {
 
     private final CrawlRepository crawlRepo;
 
@@ -31,7 +31,8 @@ public class CrawlServiceImpl implements CrawlService{
         List<String> list = new ArrayList();
         Document innerDoc = null;
 
-        for (int i = 0; i < link.size(); i++) {;
+        for (int i = 0; i < link.size(); i++) {
+            ;
             String a = link.get(i).attr("href");
             list.add(a);
         }
@@ -40,7 +41,7 @@ public class CrawlServiceImpl implements CrawlService{
 
         List<Actor> actorList = new ArrayList<>();
 
-        for(int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             String value = list.get(i);
             innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
             Elements birthday = innerDoc.select("table.unstackable>tbody>tr:eq(0)>td.three+td");
@@ -87,3 +88,4 @@ public class CrawlServiceImpl implements CrawlService{
                 .execute()
                 .parse();
     }
+}

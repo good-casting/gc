@@ -1,7 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import styled from "styled-components";
 import { Modal } from "react-bootstrap";
 import GlobalContext from "../../context/GlobalContext";
+import { useDispatch } from "react-redux";
+import { signin } from "../../state/reducer/user.reducer";
+
 
 const ModalStyled = styled(Modal)`
   /* &.modal {
@@ -20,6 +23,20 @@ const ModalSignIn = (props) => {
   const togglePassword = () => {
     setShowPass(!showPass);
   };
+
+  const dispatch = useDispatch()
+
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: ""
+  })
+
+  const onChange = useCallback((e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value
+    })
+  })
 
   return (
     <ModalStyled
@@ -69,7 +86,7 @@ const ModalSignIn = (props) => {
             </div>
             <div className="col-lg-7 col-md-6">
               <div className="bg-white-2 h-100 px-11 pt-11 pb-7">
-                <form action="/">
+                <form onSubmit={(e) => e.preventDefault()}>
                   <div className="form-group">
                     <label
                       htmlFor="email"
@@ -82,6 +99,9 @@ const ModalSignIn = (props) => {
                       className="form-control"
                       placeholder="example@gmail.com"
                       id="email"
+                      name="email"
+                      value={inputs.email}
+                      onChange={onChange}
                     />
                   </div>
                   <div className="form-group">
@@ -97,6 +117,9 @@ const ModalSignIn = (props) => {
                         className="form-control"
                         id="password"
                         placeholder="Enter password"
+                        name="password"
+                        value={inputs.password}
+                        onChange={onChange}
                       />
                       <a
                         href="/#"
@@ -133,8 +156,9 @@ const ModalSignIn = (props) => {
                     </a>
                   </div>
                   <div className="form-group mb-8">
-                    <button className="btn btn-primary btn-medium w-100 rounded-5 text-uppercase">
-                      Log in{" "}
+                    <button className="btn btn-primary btn-medium w-100 rounded-5 text-uppercase" 
+                      onClick={() => dispatch(signin())}>
+                      Log in
                     </button>
                   </div>
                   <p className="font-size-4 text-center heading-default-color">

@@ -11,9 +11,9 @@ import javax.persistence.*;
 @Entity
 public class Photo extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "photo_id")
-    private long photoId;
+    private Long photoId;
 
     @Column(name = "file_size") private String fileSize;
     @Column(name = "file_name") private String fileName;

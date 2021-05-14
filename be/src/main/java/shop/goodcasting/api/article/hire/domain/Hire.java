@@ -15,8 +15,8 @@ import java.util.List;
 @Table(name = "hires")
 public class Hire extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "hire_id") private long hireId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hire_id") private Long hireId;
 
     @Column private String title;
     @Column private String contents;

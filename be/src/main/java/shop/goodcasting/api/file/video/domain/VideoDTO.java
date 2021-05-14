@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class VideoDTO {
-    private long videoId;
+    private Long videoId;
     private String fileSize;
     private String fileName;
     private String savedFileName;

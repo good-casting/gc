@@ -5,6 +5,7 @@ import PageWrapper from "../components/PageWrapper";
 
 const Faq = () => {
   const [openItem, setOpenItem] = useState(1);
+  
   return (
     <>
       <PageWrapper>

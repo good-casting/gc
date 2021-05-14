@@ -22,10 +22,11 @@ import java.util.List;
 public class CrawlServiceImpl implements CrawlService {
 
     private final CrawlRepository crawlRepo;
-
+    private final HireRepo hireRepo;
     @Override
     public List<Actor> actorCrawl() throws IOException {
-        Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/category/282/page/1");
+        for(int j=1 ;j<230;j++){
+        Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/page/"+j);
         Elements link = document.select("div.description>a");
 
         List<String> list = new ArrayList();
@@ -44,17 +45,87 @@ public class CrawlServiceImpl implements CrawlService {
         for (int i = 0; i < list.size(); i++) {
             String value = list.get(i);
             innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
+            Elements name = innerDoc.select("table.ui>thead>tr>th>h2>a");
             Elements birthday = innerDoc.select("table.unstackable>tbody>tr:eq(0)>td.three+td");
-            log.info("birthday" + birthday);
+            Elements height = innerDoc.select("table.unstackable>tbody>tr:eq(3)>td.three+td");
+            Elements weight = innerDoc.select("table.unstackable>tbody>tr:eq(4)>td.three+td");
+
+            log.info("name" + name);
 
             Actor actor = new Actor();
-            // actor.setBirthday(birthday.get(i).text());
-            actorList.add(actor);
-            crawlRepo.save(actor);
+            String yeardel= birthday.text().replace("년",""); //출생년도 "년" 삭제
+            String cmdel= height.text().replace("Cm",""); //키 "cm" 삭제
+            String kgdel= weight.text().replace("Kg",""); //키 "cm" 삭제
+            boolean human = (height.text().contains("Cm") &&weight.text().contains("Kg"));
+
+            if(human){
+                actor.setBirthday(yeardel);
+                actor.setHeight(cmdel);
+                actor.setWeight(kgdel);
+                actor.setName(name.text());
+                actorList.add(actor);
+                crawlRepo.save(actor);
+            }
         }
-        log.info("actorList.size() : " + actorList.size());
-        return actorList;
+            log.info("actorList.size() : " + actorList.size());
+
     }
+        return null;
+    }
+
+    @Override
+    public List<Hire> hireCrawl() throws IOException {
+        for(int j=1 ;j<2;j++){
+            Document document = connectUrl("https://www.filmmakers.co.kr/performerWanted/page/"+j);
+           // Document document = connectUrl("https://www.filmmakers.co.kr/actorsAudition/page/1");
+            //Elements link = document.select("div.mobile-padding>div#board-list>table.table>tbody>tr>td>a.block");
+            Elements link = document.select("a.block");
+            log.info("link" + link);
+            List<String> list = new ArrayList();
+            Document innerDoc = null;
+
+            for (int i = 0; i < link.size(); i++) {
+                ;
+                String a = link.get(i).attr("href");
+                list.add(a);
+                log.info("-----"+list);
+            }
+
+            log.info("list.size : " + list.size());
+
+            List<Hire> hireList = new ArrayList<>();
+
+            for (int i = 0; i < list.size(); i++) {
+                String value = list.get(i);
+                innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
+                //log.info("연결프로필"+innerDoc);
+                Elements hire_title = innerDoc.select("table.ui>thead>tr>th>h2>a");
+                Elements title = innerDoc.select("table.celled>tbody>tr:eq(1)>td:eq(1)");
+                log.info("title" + title.text());
+
+                Hire hire = new Hire();
+                //String yeardel= birthday.text().replace("년",""); //출생년도 "년" 삭제
+                //boolean human = (height.text().contains("Cm") &&weight.text().contains("Kg"));
+
+                hire.setHireTitle(hire_title.text());
+                hire.setTitle(title.text());
+           /*     if(human){
+                    actor.setBirthday(yeardel);
+                    actor.setHeight(cmdel);
+                    actor.setWeight(kgdel);
+                    actor.setName(name.text());
+                    actorList.add(actor);
+                    crawlRepo.save(actor);
+                }*/
+               hireRepo.save(hire);
+            }
+
+            log.info("hireList.size() : " + hireList.size());
+
+        }
+        return null;
+    }
+
 
     @Override
     public List<Actor> nomalCrawl() throws IOException {
@@ -89,4 +160,3 @@ public class CrawlServiceImpl implements CrawlService {
                 .parse();
     }
 }
-

@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "producers")
 public class Producer extends BaseEntity {
-    @Id @GeneratedValue
-    @Column(name = "producer_id") private long producerId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "producer_id") private Long producerId;
 
     @Column(unique = true) private String username;
     @Column private String name;

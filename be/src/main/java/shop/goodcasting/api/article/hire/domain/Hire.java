@@ -1,6 +1,9 @@
 package shop.goodcasting.api.article.hire.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.goodcasting.api.board.hireboad.domain.HireBoard;
 import shop.goodcasting.api.common.domain.BaseEntity;
 import shop.goodcasting.api.common.domain.HireProfile;
@@ -15,8 +18,8 @@ import java.util.List;
 @Table(name = "hires")
 public class Hire extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "hire_id") private long hireId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hire_id") private Long hireId;
 
     @Column private String title;
     @Column private String contents;
@@ -31,4 +34,5 @@ public class Hire extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "hire_board_id")
     private HireBoard hireBoard;
+
 }

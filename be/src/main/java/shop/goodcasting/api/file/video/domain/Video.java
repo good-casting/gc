@@ -11,9 +11,9 @@ import javax.persistence.*;
 @Entity
 public class Video extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "video_id")
-    private long videoId;
+    private Long videoId;
 
     @Column(name = "file_size") private String fileSize;
     @Column(name = "file_name") private String fileName;

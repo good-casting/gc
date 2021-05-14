@@ -1,8 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Modal } from "react-bootstrap";
 import GlobalContext from "../../context/GlobalContext";
 import Checkbox from "../Core/Checkbox"
+import { useDispatch } from "react-redux";
+import { signup } from "../../state/reducer/user.reducer";
 
 const ModalStyled = styled(Modal)`
   /* &.modal {
@@ -13,6 +15,26 @@ const ModalStyled = styled(Modal)`
 const ModalSignUp = (props) => {
   const [showPassFirst, setShowPassFirst] = useState(true);
   const [showPassSecond, setShowPassSecond] = useState(true);
+
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
+
+  const [checkValidate, setCheckValidate] = useState("")
+
+  const onChange = useCallback((e) => {
+    
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value
+    })
+  })
+
+  useEffect(() => {
+    setCheckValidate((inputs.confirmPassword !== inputs.password) ? "red" : "")
+  }, [inputs])
 
   const gContext = useContext(GlobalContext);
   const handleClose = () => {
@@ -26,8 +48,11 @@ const ModalSignUp = (props) => {
   const togglePasswordSecond = () => {
     setShowPassSecond(!showPassSecond);
   };
+  
+  const dispatch = useDispatch();
 
   return (
+    <>
     <ModalStyled
       {...props}
       size="lg"
@@ -77,7 +102,7 @@ const ModalSignUp = (props) => {
             <div className="col-lg-7 col-md-6">
               <div className="bg-white-2 h-100 px-11 pt-11 pb-7">
 
-                <form action="/">
+                <form onSubmit={e => e.preventDefault()}>
                   <div className="form-group">
                     <label
                       htmlFor="email2"
@@ -90,6 +115,9 @@ const ModalSignUp = (props) => {
                       className="form-control"
                       placeholder="example@gmail.com"
                       id="email2"
+                      name="email"
+                      value={inputs.email}
+                      onChange={onChange}
                     />
                   </div>
                   <div className="form-group">
@@ -105,6 +133,10 @@ const ModalSignUp = (props) => {
                         className="form-control"
                         id="password"
                         placeholder="Enter password"
+                        name="password"
+                        value={inputs.password}
+                        onChange={onChange}
+                        style={{backgroundColor: `${checkValidate}`, opacity: "0.4", borderColor: "gray"}}
                       />
                       <a
                         href="/#"
@@ -131,6 +163,10 @@ const ModalSignUp = (props) => {
                         className="form-control"
                         id="password2"
                         placeholder="Enter password"
+                        name="confirmPassword"
+                        value={inputs.confirmPassword}
+                        onChange={onChange}
+                        style={{backgroundColor: `${checkValidate}`, opacity: "0.4", borderColor: "gray"}}
                       />
                       <a
                         href="/#"
@@ -170,12 +206,13 @@ const ModalSignUp = (props) => {
                     </a>
                   </div>
                   <div className="form-group mb-8">
-                    <button className="btn btn-primary btn-medium w-100 rounded-5 text-uppercase">
-                      Sign Up{" "}
+                    <button className="btn btn-primary btn-medium w-100 rounded-5 text-uppercase" 
+                    onClick={() => dispatch(signup(inputs))}>
+                      Sign Up
                     </button>
                   </div>
                   <p className="font-size-4 text-center heading-default-color">
-                    Don’t have an account?{" "}
+                    Don’t have an account?
                     <a href="/#" className="text-primary">
                       Create a free account
                     </a>
@@ -187,6 +224,7 @@ const ModalSignUp = (props) => {
         </div>
       </Modal.Body>
     </ModalStyled>
+    </>
   );
 };
 

@@ -13,9 +13,10 @@ import javax.persistence.*;
 @Table(name = "hire_boards")
 public class HireBoard extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hire_board_id")
     private Long hireBoardId;
+
 
     @Column private String title;
     @Column private String contents;

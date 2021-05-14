@@ -7,7 +7,7 @@ import shop.goodcasting.api.article.profile.domain.Profile;
 @Data
 @Component
 public class PhotoDTO {
-    private long photoId;
+    private Long photoId;
     private String fileSize;
     private String fileName;
     private String savedFileName;

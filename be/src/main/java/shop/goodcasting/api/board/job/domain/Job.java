@@ -17,8 +17,9 @@ import javax.persistence.*;
 public class Job extends BaseEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "job_id") private long jobId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "job_id") private Long jobId;
+
 
     @Column private String title;
     @Column private String contents;
@@ -29,4 +30,5 @@ public class Job extends BaseEntity {
     public void changeContents(String contents) {
         this.contents = contents;
     }
+
 }

@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Data
 @Component @Builder
 @AllArgsConstructor
@@ -24,11 +22,11 @@ public class ActorDTO {
     private String height;
     private String weight;
     private String agency;
-    private boolean major;
+
+    private Boolean major;
+
 
 //    private List<Role> roles;
 
     private String token;
-
-
 }

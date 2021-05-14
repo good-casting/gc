@@ -1,9 +1,6 @@
 package shop.goodcasting.api.article.hire.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import shop.goodcasting.api.board.hireboad.domain.HireBoard;
 import shop.goodcasting.api.common.domain.BaseEntity;
 import shop.goodcasting.api.common.domain.HireProfile;
@@ -15,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@Data
 @Table(name = "hires")
 public class Hire extends BaseEntity {
     @Id

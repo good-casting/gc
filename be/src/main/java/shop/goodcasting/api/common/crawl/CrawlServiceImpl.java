@@ -25,7 +25,7 @@ public class CrawlServiceImpl implements CrawlService {
     private final HireRepo hireRepo;
     @Override
     public List<Actor> actorCrawl() throws IOException {
-        for(int j=1 ;j<230;j++){
+        for(int j=1 ;j<5;j++){
         Document document = connectUrl("https://www.filmmakers.co.kr/actorsProfile/page/"+j);
         Elements link = document.select("div.description>a");
 
@@ -75,12 +75,11 @@ public class CrawlServiceImpl implements CrawlService {
 
     @Override
     public List<Hire> hireCrawl() throws IOException {
-        for(int j=1 ;j<2;j++){
-            Document document = connectUrl("https://www.filmmakers.co.kr/performerWanted/page/"+j);
-           // Document document = connectUrl("https://www.filmmakers.co.kr/actorsAudition/page/1");
-            //Elements link = document.select("div.mobile-padding>div#board-list>table.table>tbody>tr>td>a.block");
+        for (int j = 8; j < 20; j++) {
+            Document document = connectUrl("https://www.filmmakers.co.kr/performerWanted/page/" + j);
             Elements link = document.select("a.block");
-            log.info("link" + link);
+            //log.info("link" + link);
+
             List<String> list = new ArrayList();
             Document innerDoc = null;
 
@@ -88,40 +87,43 @@ public class CrawlServiceImpl implements CrawlService {
                 ;
                 String a = link.get(i).attr("href");
                 list.add(a);
-                log.info("-----"+list);
+                log.info("-----" + list);
             }
 
-            log.info("list.size : " + list.size());
+            //log.info("list.size : " + list.size());
 
             List<Hire> hireList = new ArrayList<>();
 
             for (int i = 0; i < list.size(); i++) {
                 String value = list.get(i);
                 innerDoc = connectUrl("https://www.filmmakers.co.kr" + value);
-                //log.info("연결프로필"+innerDoc);
                 Elements hire_title = innerDoc.select("table.ui>thead>tr>th>h2>a");
                 Elements title = innerDoc.select("table.celled>tbody>tr:eq(1)>td:eq(1)");
-                log.info("title" + title.text());
+                Elements cast = innerDoc.select("table.celled>tbody>tr:eq(3)>td:eq(1)");
+                Elements filming = innerDoc.select("table.celled>tbody>tr:eq(4)>td:eq(1)");
+                Elements guarantee = innerDoc.select("table.celled>tbody>tr:eq(5)>td:eq(1)");
+                Elements personnel = innerDoc.select("table.celled>tbody>tr:eq(6)>td:eq(1)");
+                Elements deadline = innerDoc.select("table.celled>tbody>tr:eq(10)>td:eq(1)");
+                Elements contents = innerDoc.select("div.rhymix_content>p");
+                // log.info("title" + contents.text());
 
                 Hire hire = new Hire();
-                //String yeardel= birthday.text().replace("년",""); //출생년도 "년" 삭제
-                //boolean human = (height.text().contains("Cm") &&weight.text().contains("Kg"));
+                boolean deadlineTrue = (deadline.text().contains("-"));
 
-                hire.setHireTitle(hire_title.text());
-                hire.setTitle(title.text());
-           /*     if(human){
-                    actor.setBirthday(yeardel);
-                    actor.setHeight(cmdel);
-                    actor.setWeight(kgdel);
-                    actor.setName(name.text());
-                    actorList.add(actor);
-                    crawlRepo.save(actor);
-                }*/
-               hireRepo.save(hire);
+                if (deadlineTrue) {
+                    hire.setHireTitle(hire_title.text());
+                    hire.setTitle(title.text());
+                    hire.setCast(cast.text());
+                    hire.setFilming(filming.text());
+                    hire.setGuarantee(guarantee.text());
+                    hire.setPersonnel(personnel.text());
+                    hire.setDeadline(deadline.text());
+                    hire.setContents(contents.text());
+                    hireRepo.save(hire);
+                }
             }
 
             log.info("hireList.size() : " + hireList.size());
-
         }
         return null;
     }

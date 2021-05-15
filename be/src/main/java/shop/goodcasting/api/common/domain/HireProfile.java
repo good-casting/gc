@@ -9,11 +9,9 @@ import javax.persistence.*;
 @Entity
 public class HireProfile extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hire_profile_id")
     private long hireProfileId;
-
-    @Column private String regDate;
 
     @ManyToOne
     @JoinColumn(name = "hire_id")

@@ -20,8 +20,8 @@ public class Profile extends BaseEntity {
     @Column(name = "profile_id")
     private Long profileId;
 
-    @Column Boolean privacy;
-    @Column String contents;
+    @Column private Boolean privacy;
+    @Column private String contents;
     @Column private String career;
 
     @ManyToOne

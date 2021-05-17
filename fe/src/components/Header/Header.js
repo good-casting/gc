@@ -250,7 +250,7 @@ const Header = () => {
                   >
                     <i className="fas fa-bell heading-default-color"></i>
                     <span className="font-size-3 count font-weight-semibold text-white bg-primary circle-24 border border-width-3 border border-white">
-                      3
+                      알람배지
                     </span>
                   </Link>
                 </div>

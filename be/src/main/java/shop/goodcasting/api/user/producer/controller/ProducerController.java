@@ -27,16 +27,6 @@ public class ProducerController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<Producer> signup(@RequestBody Producer producer){
-        return ResponseEntity.ok(service.signup(producer));
-    }
-
-    @PostMapping("/signin")
-    public ResponseEntity<ProducerDTO> signin(@RequestBody ProducerDTO producerDTO){
-        return ResponseEntity.ok(service.signin(modelMapper.map(producerDTO, Producer.class)));
-    }
-
     @GetMapping("/detail")
     public ResponseEntity<Optional<Producer>> detail(@RequestBody Producer producer){
         return ResponseEntity.ok(service.findById(producer.getProducerId()));

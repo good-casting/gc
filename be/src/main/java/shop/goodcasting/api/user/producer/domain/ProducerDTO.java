@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProducerDTO {
     private Long producerId;
-    private String username;
-    private String password;
     private String email;
     private String agency;
     private String phone;

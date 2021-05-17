@@ -1,7 +1,6 @@
 package shop.goodcasting.api.article.profile.domain;
 
 import lombok.Getter;
-import shop.goodcasting.api.board.job.domain.Job;
 import shop.goodcasting.api.common.domain.BaseEntity;
 import shop.goodcasting.api.common.domain.HireProfile;
 import shop.goodcasting.api.file.video.domain.Video;
@@ -33,8 +32,4 @@ public class Profile extends BaseEntity {
 
     @OneToMany(mappedBy = "profile")
     private List<HireProfile> hires = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "job_board_id")
-    private Job job;
 }

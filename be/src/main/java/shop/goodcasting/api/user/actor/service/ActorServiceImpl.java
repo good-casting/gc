@@ -16,7 +16,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ActorServiceImpl extends AbstractService<Actor> implements ActorService {
-
     private final ActorRepository repo;
     private final ModelMapper modelMapper;
 
@@ -55,19 +54,6 @@ public class ActorServiceImpl extends AbstractService<Actor> implements ActorSer
     public Boolean existById(Long id) {
         return repo.existsById(id);
     }
-
-    @Override
-    public Actor signup(Actor actor) {
-        return repo.save(actor);
-    }
-
-    @Override
-    public ActorDTO signin(Actor actor) {
-        ActorDTO userDto = modelMapper.map(actor, ActorDTO.class);
-        repo.signin(actor.getUsername(), actor.getPassword());
-        return userDto;
-    }
-
 }
 
 

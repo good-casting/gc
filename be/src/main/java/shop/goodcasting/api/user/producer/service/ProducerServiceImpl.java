@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import shop.goodcasting.api.common.service.AbstractService;
 import shop.goodcasting.api.user.producer.domain.Producer;
-import shop.goodcasting.api.user.producer.domain.ProducerDTO;
 import shop.goodcasting.api.user.producer.repository.ProducerRepository;
 
 import java.util.List;
@@ -53,17 +52,5 @@ public class ProducerServiceImpl extends AbstractService<Producer> implements Pr
     @Override
     public Boolean existById(Long id) {
         return repo.existsById(id);
-    }
-
-    @Override
-    public Producer signup(Producer producer) {
-        return repo.save(producer);
-    }
-
-    @Override
-    public ProducerDTO signin(Producer producer) {
-        ProducerDTO userDto = modelMapper.map(producer, ProducerDTO.class);
-        repo.signin(producer.getUsername(), producer.getPassword());
-        return userDto;
     }
 }

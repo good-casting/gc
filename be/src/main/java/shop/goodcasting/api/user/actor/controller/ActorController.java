@@ -7,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import shop.goodcasting.api.user.actor.domain.Actor;
-import shop.goodcasting.api.user.actor.domain.ActorDTO;
 import shop.goodcasting.api.user.actor.repository.ActorRepository;
 import shop.goodcasting.api.user.actor.service.ActorServiceImpl;
 
@@ -29,15 +28,6 @@ public class ActorController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<Actor> signup(@RequestBody Actor actor){
-        return ResponseEntity.ok(service.signup(actor));
-    }
-
-    @PostMapping("/signin")
-    public ResponseEntity<ActorDTO> signin(@RequestBody ActorDTO actorDTO){
-        return ResponseEntity.ok(service.signin(modelMapper.map(actorDTO, Actor.class)));
-    }
 
     @GetMapping("/detail")
     public ResponseEntity<Optional<Actor>> detail(@RequestBody Actor actor){

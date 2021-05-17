@@ -1,22 +1,19 @@
 package shop.goodcasting.api.user.actor.domain;
 
-import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Getter;
 import shop.goodcasting.api.common.domain.BaseEntity;
+import shop.goodcasting.api.user.login.domain.UserVO;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
-@Data
 @Table(name = "actors")
 public class Actor extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
     private Long actorId;
 
-    @Column(unique = true) private String username;
-    @Column private String password;
     @Column private String name;
     @Column private String gender;
     @Column private String birthday;
@@ -27,6 +24,7 @@ public class Actor extends BaseEntity {
     @Column private String agency;
     @Column private Boolean major;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    List<Role> roles;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserVO userVO;
 }

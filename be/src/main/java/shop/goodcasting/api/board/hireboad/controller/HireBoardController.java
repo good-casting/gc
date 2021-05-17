@@ -11,7 +11,7 @@ import shop.goodcasting.api.board.hireboad.service.HireBoardServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/hireboard")
+@RequestMapping("/hireboards")
 @RestController
 @RequiredArgsConstructor
 public class HireBoardController {

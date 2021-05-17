@@ -2,8 +2,8 @@ package shop.goodcasting.api.common.crawl;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import shop.goodcasting.api.user.actor.domain.Actor;
+import shop.goodcasting.api.article.hire.domain.Hire;
 
 @Repository
-public interface CrawlRepository extends JpaRepository<Actor,Long> {
+public interface HireRepo extends JpaRepository<Hire,Long> {
 }

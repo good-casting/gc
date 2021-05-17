@@ -21,7 +21,11 @@ public class CrawlController {
 
     @GetMapping("/actor")
     public ResponseEntity<List<Actor>> bugs() throws IOException {
-        return ResponseEntity.ok(service.nomalCrawl());
+        return ResponseEntity.ok(service.actorCrawl());
     }
 
+    @GetMapping("/hire")
+    public ResponseEntity<List<Hire>> hireCrawling() throws IOException {
+        return ResponseEntity.ok(service.hireCrawl());
+    }
 }

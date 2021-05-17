@@ -28,8 +28,9 @@ public class Hire extends BaseEntity {
     @JoinColumn(name = "producer_id")
     private Producer producer;
 
-    @OneToMany(mappedBy = "hire")
-    private List<HireProfile> profiles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "hire" ,fetch = FetchType.EAGER)
+    private List<HireProfile> profiles;
 
     @ManyToOne
     @JoinColumn(name = "hire_board_id")
